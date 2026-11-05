@@ -1,17 +1,30 @@
 package nagikh.dev;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 public class Main {
     static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+
+        GreetingPrinterConstructor printer =
+                context.getBean(GreetingPrinterConstructor.class);
+
+        printer.print("Pasha");
+
+        GreetingPrinterSetter printer2 =
+                context.getBean(GreetingPrinterSetter.class);
+
+        printer2.print("Pasha");
+
+        GreetingPrinterField printer3 =
+                context.getBean(GreetingPrinterField.class);
+
+        printer3.print("Pasha");
+
+
+        context.close();
+
     }
 }
